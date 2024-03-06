@@ -226,18 +226,20 @@ StgWord64 stg_integerToWord64 (StgInt sa, StgByteArray /* Really: mp_limb_t* */ 
 #  define INLINE inline
 # endif
 #endif
+#undef INLINE
+#define INLINE static inline
 
 INLINE int __hscore_get_errno(void) { return errno; }
 INLINE void __hscore_set_errno(int e) { errno = e; }
 
 #if !defined(_MSC_VER)
-INLINE int __hscore_s_isreg(m)  { return S_ISREG(m);  }
-INLINE int __hscore_s_isdir(m)  { return S_ISDIR(m);  }
-INLINE int __hscore_s_isfifo(m) { return S_ISFIFO(m); }
-INLINE int __hscore_s_isblk(m)  { return S_ISBLK(m);  }
-INLINE int __hscore_s_ischr(m)  { return S_ISCHR(m);  }
+INLINE int __hscore_s_isreg(int m)  { return S_ISREG(m);  }
+INLINE int __hscore_s_isdir(int m)  { return S_ISDIR(m);  }
+INLINE int __hscore_s_isfifo(int m) { return S_ISFIFO(m); }
+INLINE int __hscore_s_isblk(int m)  { return S_ISBLK(m);  }
+INLINE int __hscore_s_ischr(int m)  { return S_ISCHR(m);  }
 #ifdef S_ISSOCK
-INLINE int __hscore_s_issock(m) { return S_ISSOCK(m); }
+INLINE int __hscore_s_issock(int m) { return S_ISSOCK(m); }
 #endif
 #endif
 
